@@ -1,0 +1,14 @@
+FROM codercom/enterprise-multieditor:ubuntu
+
+# Run everything as root
+USER root
+
+# Install webstorm.
+RUN mkdir -p /opt/phpstorm
+RUN curl -L "https://download.jetbrains.com/webide/PhpStorm-2022.1.3.tar.gz" | tar -C /opt/phpstorm --strip-components 1 -xzvf -
+
+# Add a binary to the PATH that points to the webstorm startup script.
+RUN ln -s /opt/webstorm/bin/phpstorm.sh /usr/bin/phpstorm
+
+# Set back to coder user
+USER coder
